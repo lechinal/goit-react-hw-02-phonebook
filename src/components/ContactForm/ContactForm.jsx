@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './ContactForm.module.css';
 
-export default function ContactForm({ onAddContact }) {
+export default function ContactForm({ onAddContact, contacts }) {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -19,8 +19,12 @@ export default function ContactForm({ onAddContact }) {
       return;
     }
 
-    const contacts = JSON.parse(localStorage.getItem('contacts')) || [];
-    const existingContact = contacts.find(contact => contact.name === name);
+    // const contacts = JSON.parse(localStorage.getItem('contacts')) || [];
+
+    /* Împiedică utilizatorul să adauge contacte ale căror nume si/sau numere de telefon sunt deja în agenda telefonică.*/
+    const existingContact = contacts.find(
+      contact => contact.name === name || contact.number === number
+    );
 
     if (existingContact) {
       alert(`"${name}" is already in contacts`);

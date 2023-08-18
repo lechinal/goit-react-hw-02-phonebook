@@ -43,7 +43,7 @@ export const App = () => {
     >
       <h1>Phonebook</h1>
       <Paper>
-        <ContactForm onAddContact={handleAddContact} />
+        <ContactForm onAddContact={handleAddContact} contacts={contacts} />
       </Paper>
       <Paper>
         <h2>Contacts</h2>
