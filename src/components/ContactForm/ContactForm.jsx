@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styles from './ContactForm.module.css';
 
 export default function ContactForm({ onAddContact }) {
   const [name, setName] = useState('');
@@ -13,21 +14,48 @@ export default function ContactForm({ onAddContact }) {
   };
 
   const handleAddClick = () => {
-    if (name.trim() === '' || number.trim() === '') return;
+    if (name.trim() === '') {
+      alert('Please enter the name of the contact!');
+      return;
+    }
+
+    const contacts = JSON.parse(localStorage.getItem('contacts')) || [];
+    const existingContact = contacts.find(contact => contact.name === name);
+
+    if (existingContact) {
+      alert(`"${name}" is already in contacts`);
+      return;
+    }
 
     onAddContact(name, number);
     setName('');
     setNumber('');
+
+    const updatedContacts = [...contacts, { name, number }];
+    localStorage.setItem('contacts', JSON.stringify(updatedContacts));
   };
 
   return (
-    <div>
-      <h2>Add Contact</h2>
-      <label>Name:</label>
-      <input type="text" value={name} onChange={handleNameChange} required />
-      <label>Number:</label>
-      <input type="tel" value={number} onChange={handleNumberChange} required />
-      <button onClick={handleAddClick}>Add Contact</button>
+    <div className={styles.labels}>
+      <label>Name</label>
+      <input
+        className={styles.inputContact}
+        type="text"
+        value={name}
+        onChange={handleNameChange}
+        required
+      />
+      <label>Number</label>
+      <input
+        className={styles.inputContact}
+        type="tel"
+        value={number}
+        onChange={handleNumberChange}
+        required
+      />
+      <button className={styles.AddContactBtn} onClick={handleAddClick}>
+        Add Contact
+      </button>
     </div>
   );
 }
