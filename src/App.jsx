@@ -3,6 +3,7 @@ import { nanoid } from 'nanoid';
 import ContactForm from 'components/ContactForm/ContactForm';
 import ContactList from 'components/ContactList/ContactList';
 import Filter from './components/Filter/Filter';
+import Paper from './components/Paper/Paper';
 
 export const App = () => {
   const initialContacts = [
@@ -41,15 +42,19 @@ export const App = () => {
       }}
     >
       <h1>Phonebook</h1>
-      <ContactForm onAddContact={handleAddContact} />
-      <h2>Contacts</h2>
-      <Filter filter={filter} onFilterChange={setFilter} />
-      <ContactList
-        contacts={contacts.filter(contact =>
-          contact.name.toLowerCase().includes(filter.toLowerCase())
-        )}
-        onDeleteContact={handleDeleteContact}
-      />
+      <Paper>
+        <ContactForm onAddContact={handleAddContact} />
+      </Paper>
+      <Paper>
+        <h2>Contacts</h2>
+        <Filter filter={filter} onFilterChange={setFilter} />
+        <ContactList
+          contacts={contacts.filter(contact =>
+            contact.name.toLowerCase().includes(filter.toLowerCase())
+          )}
+          onDeleteContact={handleDeleteContact}
+        />
+      </Paper>
     </div>
   );
 };
