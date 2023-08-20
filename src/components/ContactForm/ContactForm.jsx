@@ -63,6 +63,8 @@ export default function ContactForm({ onAddContact, contacts }) {
   );
 }
 
+// PropTypes
+
 ContactForm.propTypes = {
   onAddContact: PropTypes.func.isRequired,
   contacts: PropTypes.arrayOf(
