@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from './ContactForm.module.css';
+import PropTypes from 'prop-types';
 
 export default function ContactForm({ onAddContact, contacts }) {
   const [name, setName] = useState('');
@@ -63,3 +64,13 @@ export default function ContactForm({ onAddContact, contacts }) {
     </div>
   );
 }
+
+ContactForm.propTypes = {
+  onAddContact: PropTypes.func.isRequired,
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+};
