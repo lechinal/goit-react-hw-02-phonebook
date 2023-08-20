@@ -20,8 +20,6 @@ export default function ContactForm({ onAddContact, contacts }) {
       return;
     }
 
-    // const contacts = JSON.parse(localStorage.getItem('contacts')) || [];
-
     /* Împiedică utilizatorul să adauge contacte ale căror nume si/sau numere de telefon sunt deja în agenda telefonică.*/
     const existingContact = contacts.find(
       contact => contact.name === name || contact.number === number
